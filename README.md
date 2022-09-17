@@ -14,4 +14,4 @@
 1. Adin Ilham Fahrezi
 2. Novel Bafagih
 3. Vania Sahda Annabelle
-4. Muhammad Rafli AlFayed 
+4. Muhammad Rafli Alfayed 
