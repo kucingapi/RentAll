@@ -1,9 +1,7 @@
 # RentAll
 
 <div align="center">
-  <a href="">
-    <iframe src="https://drive.google.com/file/d/1AFVs6tqZgda7gBnGD887iBjVUoR4cS5_/preview" width="640" height="480" allow="autoplay"></iframe>
-  </a>  
+  <iframe src="https://drive.google.com/file/d/1AFVs6tqZgda7gBnGD887iBjVUoR4cS5_/preview" width="640" height="480" allow="autoplay"></iframe>
 </div>
 
 Team Member
