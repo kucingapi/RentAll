@@ -2,7 +2,7 @@
 
 <div align="center">
   <a href="">
-    <img src="https://drive.google.com/file/d/1mdHcf6SkQRkJ26kToINSBPYzMZM03rnl/preview" alt="Logo" width="80" height="80">
+    <img src="https://drive.google.com/file/d/1AFVs6tqZgda7gBnGD887iBjVUoR4cS5_/preview" alt="Logo" width="80" height="80">
   </a>  
 </div>
 
