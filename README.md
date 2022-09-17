@@ -5,9 +5,11 @@
   <h3 align="center">RentAll</h3>
 </div>
 
-# BCC 50% Jomblo
 
-## Team Member
+
+## Team 
+
+### BCC 50% Jomblo
 
 1. Adin Ilham Fahrezi
 2. Novel Bafagih
