@@ -17,36 +17,17 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            var text by remember { mutableStateOf("") }
             RentAllTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(color = MaterialTheme.colors.background) {
-                    Column(modifier = Modifier.fillMaxSize()) {
-                        Greeting("Android")
-                        DefaultTextField(value = text, onValueChange = { text = it })
-                        DefaultTextField(value = text, onValueChange = { text = it }, outline = true)
-                    }
-                }
+                MainScreen()
             }
         }
     }
 }
 
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
 
 
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-    var text by remember { mutableStateOf("") }
-    Surface(color = MaterialTheme.colors.background) {
-        Column(modifier = Modifier.fillMaxSize()) {
-            Greeting("Android")
-            DefaultTextField(value = text, onValueChange = { text = it })
-            TextField(value = text, onValueChange = {text = it})
-        }
-    }
+    MainScreen()
 }
