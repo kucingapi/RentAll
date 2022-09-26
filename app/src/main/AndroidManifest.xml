@@ -10,15 +10,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RentAll">
         <activity
-            android:name=".MainActivity"
-            android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.RentAll.NoActionBar">
+            android:name=".activity.AuthActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.RentAll.NoActionBar">
         </activity>
     </application>
 
