@@ -42,6 +42,11 @@ val Typography = Typography(
         fontWeight = FontWeight.Normal,
         fontSize = 19.sp
     ),
+    h6 = TextStyle(
+        fontFamily = Satoshi,
+        fontWeight = FontWeight.Normal,
+        fontSize = 16.sp
+    ),
     body1 = TextStyle(
         fontFamily = Satoshi,
         fontWeight = FontWeight.Normal,
@@ -57,11 +62,14 @@ val Typography = Typography(
         fontWeight = FontWeight.W500,
         fontSize = 14.sp
     ),
-    /* Other default text styles to override
-    caption = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Normal,
-        fontSize = 12.sp
-    )
-    */
+    subtitle1 = TextStyle(
+        fontFamily = Satoshi,
+        fontWeight = FontWeight.W500,
+        fontSize = 14.sp
+    ),
+    subtitle2 = TextStyle(
+        fontFamily = Satoshi,
+        fontWeight = FontWeight.W500,
+        fontSize = 11.sp
+    ),
 )
