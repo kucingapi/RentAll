@@ -7,6 +7,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.rentall.screens.auth.LandingScreen
 import com.example.rentall.screens.auth.SplashScreen
 
 @Composable
@@ -19,7 +20,7 @@ fun AuthNavGraph(navController: NavHostController) {
             SplashScreen(navController = navController)
         }
         composable(route = AuthRoute.Landing.route) {
-            Box(modifier = Modifier.fillMaxSize())
+            LandingScreen(navController = navController)
         }
     }
 }

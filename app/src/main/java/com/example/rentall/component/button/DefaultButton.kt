@@ -1,6 +1,7 @@
 package com.example.rentall.component
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -9,6 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -25,13 +27,16 @@ fun DefaultButton(text: String = "",
                   paddingInput: Padding? = null,
                   iconRight: Int? = null,
                   iconLeft: Int? = null,
-                  onClick: () -> Unit = {}
+                  onClick: () -> Unit = {},
+                  buttonColor : Color? = null,
+                  iconSizeInput : Dp? = null
 ){
     lateinit var textStyle: TextStyle
     lateinit var padding: Padding
     var iconSize: Dp
     var border: Dp
     var shape: Dp
+    var borderStroke: BorderStroke?
 
     if(size.equals(ButtonSize.LARGE)){
         textStyle = MaterialTheme.typography.h3
@@ -54,24 +59,50 @@ fun DefaultButton(text: String = "",
         shape = 7.dp
         iconSize = 16.dp
     }
+
+    if(iconSizeInput != null)
+        iconSize = iconSizeInput
+
     if(paddingInput != null){
         padding = paddingInput
     }
+    if(buttonType.equals(ButtonType.OUTLINE)){
+        borderStroke = BorderStroke(border, color = MaterialTheme.colors.primary)
+    }
+    else{
+        borderStroke = null
+    }
 
     val colors =
-        if(buttonType == ButtonType.PRIMARY)
-            ButtonDefaults.buttonColors()
-        else if(buttonType == ButtonType.OUTLINE)
-            ButtonDefaults.outlinedButtonColors()
+        if (buttonType == ButtonType.PRIMARY)
+            ButtonDefaults.buttonColors(backgroundColor =
+            if(buttonColor != null)
+                buttonColor
+            else
+                MaterialTheme.colors.primary
+            )
+        else if (buttonType == ButtonType.OUTLINE)
+            ButtonDefaults.outlinedButtonColors(backgroundColor =
+            if(buttonColor != null)
+                buttonColor
+            else
+                Color.Transparent
+            )
         else
-            ButtonDefaults.textButtonColors()
+            ButtonDefaults.textButtonColors(backgroundColor =
+            if(buttonColor != null)
+                buttonColor
+            else
+                Color.Transparent
+            )
 
     Button(onClick = onClick,
         colors = colors,
-        border = BorderStroke(border, color = MaterialTheme.colors.primary),
+        border = borderStroke,
         shape = RoundedCornerShape(shape),
+        modifier = modifier
     ) {
-        Row(modifier = modifier.padding(horizontal = padding.horizontal, vertical =  padding.vertical),
+        Row(modifier = Modifier.padding(horizontal = padding.horizontal, vertical =  padding.vertical),
             verticalAlignment = Alignment.CenterVertically) {
             if(iconLeft != null) {
                 Icon(
@@ -82,7 +113,7 @@ fun DefaultButton(text: String = "",
                 )
             }
             Text(
-                modifier = modifier.padding(
+                modifier = Modifier.padding(
                     horizontal = padding.horizontal,
                     vertical = padding.vertical
                 ),
@@ -111,5 +142,12 @@ fun defaultButtonPreview(){
         DefaultButton(text = "insert text", buttonType = ButtonType.PRIMARY, size=ButtonSize.SMALL)
         DefaultButton(text = "insert text", buttonType = ButtonType.OUTLINE, size=ButtonSize.MEDIUM)
         DefaultButton(text = "insert text", buttonType = ButtonType.OUTLINE, size=ButtonSize.LARGE)
+        DefaultButton(text = "insert text", buttonType = ButtonType.TEXT, size=ButtonSize.LARGE)
+        DefaultButton(
+            text = "Mulai",
+            ButtonType.TEXT,
+            buttonColor = Color.White,
+            modifier = Modifier.fillMaxWidth()
+        )
     }
 }

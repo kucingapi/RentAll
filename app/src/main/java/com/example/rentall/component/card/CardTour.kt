@@ -19,6 +19,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.rentall.R
 import com.example.rentall.ui.theme.Picton700
+import com.example.rentall.ui.theme.RentAllTheme
 
 @Composable
 fun CardTour(paintId: Int = R.drawable.img_wisata_monas,
@@ -60,7 +61,7 @@ fun CardTour(paintId: Int = R.drawable.img_wisata_monas,
                         verticalArrangement = Arrangement.spacedBy(3.dp)
                     ) {
                         Text(text = title,
-                            style = MaterialTheme.typography.h4,
+                            style = MaterialTheme.typography.h3,
                             color = Color.White,
                             fontWeight = FontWeight.Bold)
                         Box(
@@ -69,7 +70,7 @@ fun CardTour(paintId: Int = R.drawable.img_wisata_monas,
                                 .height(2.dp)
                                 .background(Color.White))
                         Text(text = description,
-                            style = MaterialTheme.typography.subtitle2,
+                            style = MaterialTheme.typography.body2,
                             color = Color.White,
                             maxLines = 2,
                             fontWeight = FontWeight.Normal,
@@ -98,7 +99,9 @@ fun CardTour(paintId: Int = R.drawable.img_wisata_monas,
 @Preview(showBackground = true)
 @Composable
 fun defaultCardTour(){
-    Column(modifier = Modifier.fillMaxSize()){
-        CardTour()
+    RentAllTheme {
+        Column(modifier = Modifier.fillMaxSize()) {
+            CardTour()
+        }
     }
 }
