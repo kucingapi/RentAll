@@ -1,10 +1,7 @@
 package com.example.rentall.component.textfield
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
@@ -62,7 +59,7 @@ fun defaultButtonPreview(){
     var text by remember { mutableStateOf("") }
 
     Column(modifier = Modifier.fillMaxSize()){
-        DefaultTextField(value = text, onValueChange = {text = it} )
+        DefaultTextField(value = text, onValueChange = {text = it}, placeholder = "Nama Lengkap", modifier = Modifier.fillMaxWidth())
         DefaultTextField(value = text, onValueChange = {text = it}, outline = true )
         TextField(value = text, onValueChange = {text = it})
     }

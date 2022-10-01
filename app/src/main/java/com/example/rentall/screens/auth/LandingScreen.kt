@@ -22,6 +22,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.rentall.R
 import com.example.rentall.component.ButtonType
 import com.example.rentall.component.DefaultButton
+import com.example.rentall.screens.auth.navigation.AuthRoute
 import com.example.rentall.ui.theme.*
 
 @Composable
@@ -30,15 +31,14 @@ fun LandingScreen(navController: NavHostController) {
         .fillMaxSize()
         .background(Picton200)
     ){
-        Card(
+        Image(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(320.dp),
-            backgroundColor = Picton100,
-            shape = RoundedCornerShape(bottomEndPercent = 100, bottomStartPercent = 100)
-        ){
-
-        }
+                ,
+            painter = painterResource(id = R.drawable.ic_half_circle),
+            contentDescription = "half circle",
+            contentScale = ContentScale.FillBounds
+        )
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -69,14 +69,24 @@ fun LandingScreen(navController: NavHostController) {
                 )
             }
         }
-        Box(Modifier.padding(bottom = 50.dp, start = GridMargin.value.margin, end = GridMargin.value.margin).align(Alignment.BottomCenter)){
+        Box(
+            Modifier
+                .padding(
+                    bottom = 50.dp,
+                    start = GridMargin.value.margin,
+                    end = GridMargin.value.margin
+                )
+                .align(Alignment.BottomCenter)){
             DefaultButton(
                 text = "Mulai",
                 ButtonType.TEXT,
                 buttonColor = Color.White,
                 modifier = Modifier.fillMaxWidth(),
                 iconRight = R.drawable.ic_baseline_chevron_right_24,
-                iconSizeInput = 18.dp
+                iconSizeInput = 18.dp,
+                onClick = {
+                    navController.navigate(AuthRoute.Register.route)
+                }
             )
         }
     }
