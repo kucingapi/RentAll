@@ -1,10 +1,7 @@
 package com.example.rentall.component.textfield
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
@@ -15,6 +12,7 @@ import androidx.compose.ui.unit.dp
 import com.example.rentall.ui.theme.Picton100
 import com.example.rentall.ui.theme.Picton300
 import com.example.rentall.ui.theme.Picton400
+import com.example.rentall.ui.theme.RentAllTheme
 
 @Composable
 fun DefaultTextField(value: String,
@@ -28,7 +26,7 @@ fun DefaultTextField(value: String,
         OutlinedTextField(
             value = value,
             onValueChange = onValueChange,
-            label = { Text(placeholder, color = Picton400, style = MaterialTheme.typography.h6) },
+            label = { Text(placeholder, color = Picton400, style = MaterialTheme.typography.h4) },
             colors = TextFieldDefaults.textFieldColors(
                 textColor = Picton400,
                 focusedIndicatorColor = Picton400,
@@ -41,7 +39,7 @@ fun DefaultTextField(value: String,
         TextField(
             value = value,
             onValueChange = onValueChange,
-            label = { Text(placeholder, color = Picton400, style = MaterialTheme.typography.h6) },
+            label = { Text(placeholder, color = Picton400, style = MaterialTheme.typography.h5) },
             colors = TextFieldDefaults.textFieldColors(
                 backgroundColor = Picton100,
                 textColor = Picton400,
@@ -61,9 +59,22 @@ fun DefaultTextField(value: String,
 fun defaultButtonPreview(){
     var text by remember { mutableStateOf("") }
 
-    Column(modifier = Modifier.fillMaxSize()){
-        DefaultTextField(value = text, onValueChange = {text = it} )
-        DefaultTextField(value = text, onValueChange = {text = it}, outline = true )
-        TextField(value = text, onValueChange = {text = it})
+    RentAllTheme {
+        Column(modifier = Modifier.fillMaxSize()) {
+            DefaultTextField(
+                modifier = Modifier.fillMaxWidth(),
+                value = text,
+                onValueChange = { text = it },
+                placeholder = "Nama Lengkap"
+            )
+            DefaultTextField(
+                modifier = Modifier.fillMaxWidth(),
+                value = text,
+                onValueChange = { text = it },
+                placeholder = "Nama Lengkap"
+            )
+            DefaultTextField(value = text, onValueChange = { text = it }, outline = true)
+            TextField(value = text, onValueChange = { text = it })
+        }
     }
 }
