@@ -22,38 +22,18 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
 import com.example.rentall.R
 import com.example.rentall.component.ButtonType
-import com.example.rentall.component.CircleBlur
 import com.example.rentall.component.DefaultButton
 import com.example.rentall.component.button.IconButtonDefault
 import com.example.rentall.component.textfield.DefaultTextField
 import com.example.rentall.ui.theme.*
 
 @Composable
-fun RegisterScreen(navController: NavHostController) {
+fun LoginScreen(navController: NavHostController) {
     var text by remember { mutableStateOf("") }
-    val circleSize = 450.dp
     Box(modifier = Modifier
         .fillMaxSize()
         .background(Picton200)
     ){
-        Box(modifier = Modifier
-            .align(Alignment.TopEnd)
-            .offset(x = 180.dp, y = (-150).dp)){
-            CircleBlur(
-                contentScale = ContentScale.FillBounds,
-                width = circleSize,
-                height = circleSize
-            )
-        }
-        Box(modifier = Modifier
-            .align(Alignment.BottomStart)
-            .offset(y = 180.dp, x = (-150).dp)){
-            CircleBlur(
-                contentScale = ContentScale.FillBounds,
-                width = circleSize,
-                height = circleSize
-            )
-        }
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -93,25 +73,7 @@ fun RegisterScreen(navController: NavHostController) {
                     modifier = Modifier.fillMaxWidth(),
                     value = text,
                     onValueChange = { text = it },
-                    placeholder = "Nama Lengkap"
-                )
-                DefaultTextField(
-                    modifier = Modifier.fillMaxWidth(),
-                    value = text,
-                    onValueChange = { text = it },
-                    placeholder = "NIK"
-                )
-                DefaultTextField(
-                    modifier = Modifier.fillMaxWidth(),
-                    value = text,
-                    onValueChange = { text = it },
                     placeholder = "Email"
-                )
-                DefaultTextField(
-                    modifier = Modifier.fillMaxWidth(),
-                    value = text,
-                    onValueChange = { text = it },
-                    placeholder = "Nomor Telepon"
                 )
                 DefaultTextField(
                     modifier = Modifier.fillMaxWidth(),
@@ -119,14 +81,8 @@ fun RegisterScreen(navController: NavHostController) {
                     onValueChange = { text = it },
                     placeholder = "Password"
                 )
-                DefaultTextField(
-                    modifier = Modifier.fillMaxWidth(),
-                    value = text,
-                    onValueChange = { text = it },
-                    placeholder = "Konfirmasi Password"
-                )
             }
-            RegisterWithGoogle()
+            LoginWithGoogle()
             Column(
                 verticalArrangement = Arrangement.spacedBy(20.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
@@ -157,7 +113,7 @@ fun RegisterScreen(navController: NavHostController) {
 }
 
 @Composable
-fun RegisterWithGoogle() {
+fun LoginWithGoogle() {
     Column(
         verticalArrangement = Arrangement.spacedBy(20.dp),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -198,9 +154,9 @@ fun RegisterWithGoogle() {
 
 @Preview
 @Composable
-fun RegisterPrev() {
+fun LoginPrev() {
     val navController = rememberNavController()
     RentAllTheme {
-        RegisterScreen(navController = navController)
+        LoginScreen(navController = navController)
     }
 }

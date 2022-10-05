@@ -21,16 +21,27 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.rentall.R
 import com.example.rentall.component.ButtonType
+import com.example.rentall.component.CircleBlur
 import com.example.rentall.component.DefaultButton
 import com.example.rentall.screens.auth.navigation.AuthRoute
 import com.example.rentall.ui.theme.*
 
 @Composable
 fun LandingScreen(navController: NavHostController) {
+    val circleSize = 450.dp
     Box(modifier = Modifier
         .fillMaxSize()
         .background(Picton200)
     ){
+        Box(modifier = Modifier
+            .align(Alignment.BottomStart)
+            .offset(y = 180.dp, x = (-150).dp)){
+            CircleBlur(
+                contentScale = ContentScale.FillBounds,
+                width = circleSize,
+                height = circleSize
+            )
+        }
         Image(
             modifier = Modifier
                 .fillMaxWidth()

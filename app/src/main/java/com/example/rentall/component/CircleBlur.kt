@@ -17,7 +17,7 @@ import com.example.rentall.R
 
 @Composable
 fun CircleBlur(
-    alpha: Float,
+    alpha: Float = 1.toFloat(),
     contentScale: ContentScale,
     width: Dp = 450.dp,
     height: Dp = 450.dp
