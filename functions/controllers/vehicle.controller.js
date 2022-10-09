@@ -61,7 +61,7 @@ app.get("/:id", async(req, res) => {
         }
         const response = {
             status: "success",
-            message: "berhasil mengambil data user",
+            message: "berhasil mengambil data kendaraan",
             data: {
                 vehicleId,
                 vehicleData
