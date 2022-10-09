@@ -5,16 +5,17 @@ const userCollection = 'user_details';
 const express = require("express");
 const default_image = 'https://www.pngitem.com/pimgs/m/150-1503945_transparent-user-png-default-user-image-png-png.png'
 const app = express();
+// const authMiddleware = require("../AuthMiddleware")
 
-app.post('/reg', (req, res) => {
+// app.use(authMiddleware);
+
+app.post('/reg', async(req, res) => {
     try {
         const user = {
-            fullname: req.body.fullname,
-            nik: req.body.nik,
-            phone: req.body.phone,
+            ...req.body,
             image: default_image,
         }
-        const data = db.collection(userCollection).add(user);
+        const data = await db.collection(userCollection).add(user);
         const response = {
             status: "success",
             message: "Registrasi berhasil",
@@ -45,8 +46,12 @@ app.get("/", async(req, res) => {
             data: temp,
         }
         res.status(200).json(response).end;
-    } catch (err) {
-        res.status(500).send(err);
+    } catch (error) {
+        res.status(500).send({
+            status: "failed",
+            message: "gagal dalam mengambil data",
+            error: error
+        }).end;
     }
 });
 
@@ -55,6 +60,9 @@ app.get("/:id", async(req, res) => {
         const snapshot = await db.collection(userCollection).doc(req.params.id).get();
         const userId = snapshot.id;
         const userData = snapshot.data();
+        if (userData.empty) {
+            throw err
+        }
         const response = {
             status: "success",
             message: "berhasil mengambil data user",
@@ -65,7 +73,11 @@ app.get("/:id", async(req, res) => {
         }
         res.status(200).json(response).end
     } catch (err) {
-        res.status(500).send(err);
+        res.status(404).send({
+            status: "failed",
+            code: "404",
+            message: "data not found"
+        }).end
     }
 });
 
@@ -97,5 +109,7 @@ app.delete("/:id", async(req, res) => {
         res.status(500).send(error);
     }
 });
+
+
 
 exports.app = functions.https.onRequest(app);
