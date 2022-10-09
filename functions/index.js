@@ -12,3 +12,4 @@ main.use(cors({ origin: true }))
 
 
 exports.users = require("./controllers/user.controllers");
+exports.vehicle = require("./controllers/vehicle.controller");
