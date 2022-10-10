@@ -26,6 +26,8 @@ import com.example.rentall.component.DefaultButton
 import com.example.rentall.component.button.IconButtonDefault
 import com.example.rentall.component.textfield.DefaultTextField
 import com.example.rentall.ui.theme.*
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.ktx.Firebase
 
 @Composable
 fun LoginScreen(navController: NavHostController) {
