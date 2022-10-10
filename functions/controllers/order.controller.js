@@ -11,7 +11,7 @@ const app = express();
 app.post('/create', async(req, res) => {
     try {
         const order = req.body;
-        const data = await db.collection(dbCollection).add(order);
+        const data = await db.collection(dbCollection).doc('orderId').add(order);
         const response = {
             status: "success",
             message: "pembuatan pesanan berhasil",
@@ -107,4 +107,4 @@ app.delete("/:id", async(req, res) => {
 
 
 
-exports.app = functions.https.onRequest(app);
+exports.app = functions.region('asia-southeast2').https.onRequest(app);

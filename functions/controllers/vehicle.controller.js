@@ -108,4 +108,4 @@ app.delete("/:id", async(req, res) => {
 
 
 
-exports.app = functions.https.onRequest(app);
+exports.app = functions.region('asia-southeast2').https.onRequest(app);
