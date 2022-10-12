@@ -4,15 +4,17 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.rentall.ui.theme.Picton100
-import com.example.rentall.ui.theme.Picton300
-import com.example.rentall.ui.theme.Picton400
-import com.example.rentall.ui.theme.RentAllTheme
+import com.example.rentall.R
+import com.example.rentall.ui.theme.*
 
 @Composable
 fun DefaultTextField(value: String,
@@ -20,8 +22,27 @@ fun DefaultTextField(value: String,
                      outline: Boolean = false,
                      placeholder: String = "Placeholder",
                      modifier: Modifier = Modifier,
-                     maxLines: Int = 1
+                     maxLines: Int = 1,
+                     password: Boolean = false
 ){
+    var passwordVisible by remember { mutableStateOf(false) }
+    var visualTransformation =
+        if(!password)
+            VisualTransformation.None
+        else{
+            if(passwordVisible)
+                VisualTransformation.None
+            else
+                PasswordVisualTransformation()
+        }
+        val image =
+            if (passwordVisible)
+                R.drawable.ic_eye_closed
+            else
+                R.drawable.ic_eye_open
+
+        val description = if (passwordVisible) "Hide password" else "Show password"
+
     if(outline){
         OutlinedTextField(
             value = value,
@@ -33,6 +54,14 @@ fun DefaultTextField(value: String,
                 unfocusedIndicatorColor = Picton400,
             ),
             shape= RoundedCornerShape(8.dp),
+            visualTransformation = visualTransformation,
+            trailingIcon ={
+                if(password) {
+                    IconButton(onClick = { passwordVisible = !passwordVisible }) {
+                        Icon(painter = painterResource(id = image), description)
+                    }
+                }
+            }
         )
     }
     else{
@@ -49,7 +78,16 @@ fun DefaultTextField(value: String,
             ),
             modifier = modifier,
             shape= RoundedCornerShape(8.dp),
-            maxLines = maxLines
+            maxLines = maxLines,
+            visualTransformation = visualTransformation,
+            trailingIcon = {
+                if(password){
+                    IconButton(onClick = { passwordVisible = !passwordVisible }) {
+                        Icon(painter = painterResource(id = image), description, tint = Picton500)
+                    }
+                }
+            }
+
         )
     }
 }
