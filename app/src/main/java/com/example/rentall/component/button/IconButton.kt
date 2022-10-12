@@ -22,12 +22,13 @@ fun IconButtonDefault(buttonType: ButtonType = ButtonType.PRIMARY,
                       size: ButtonSize = ButtonSize.MEDIUM,
                       onClick: () -> Unit = {},
                       iconId: Int,
-                      rounded: Int? = null,
-                      buttonColor : Color? = null
+                      rounded: Int = 30,
+                      buttonColor : Color? = null,
+                      modifier: Modifier = Modifier,
+                      contentPadding: Dp = 0.dp
 ){
     var borderStroke: BorderStroke?
     var border: Dp
-    val shape = rounded ?: 15
     var buttonSize: Dp
 
     if(size.equals(ButtonSize.LARGE)){
@@ -65,10 +66,11 @@ fun IconButtonDefault(buttonType: ButtonType = ButtonType.PRIMARY,
     Button(onClick = onClick,
         colors = colors,
         border = borderStroke,
-        shape = RoundedCornerShape(shape),
-        modifier = Modifier
+        shape = RoundedCornerShape(rounded),
+        modifier = modifier
             .width(buttonSize)
-            .height(buttonSize)
+            .height(buttonSize),
+        contentPadding = PaddingValues(contentPadding)
     ) {
         Icon(
             painter = painterResource(id = iconId),
