@@ -29,9 +29,13 @@ import com.example.rentall.ui.theme.Picton500
 @Composable
 fun MainScreen() {
     val navController = rememberNavController()
+    val scaffoldState = rememberScaffoldState()
     Scaffold(
-        bottomBar = { BottomBar(navController =  navController)}
+        scaffoldState = scaffoldState,
+        bottomBar = { BottomBar(navController =  navController)
+        }
     ) {
         BottomNavGraph(navController = navController)
     }
+//    scaffoldState.snackbarHostState.showSnackbar("test")
 }
