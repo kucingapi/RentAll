@@ -4,9 +4,9 @@ const db = admin.firestore();
 const dbCollection = 'wisata';
 const express = require("express");
 const app = express();
-// const authMiddleware = require("../AuthMiddleware")
+const validator = require("../AuthMiddleware")
 
-// app.use(authMiddleware);
+app.use(validator);
 
 app.post('/create', async(req, res) => {
     try {

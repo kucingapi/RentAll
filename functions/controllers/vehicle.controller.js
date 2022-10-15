@@ -3,11 +3,10 @@ const admin = require("firebase-admin");
 const db = admin.firestore();
 const vehicleCollection = 'vehicle_details';
 const express = require("express");
-const default_image = 'https://www.pngitem.com/pimgs/m/150-1503945_transparent-user-png-default-user-image-png-png.png'
 const app = express();
-// const authMiddleware = require("../AuthMiddleware")
+const validator = require("../AuthMiddleware")
 
-// app.use(authMiddleware);
+app.use(validator);
 
 app.post('/create', async(req, res) => {
     try {
@@ -46,7 +45,7 @@ app.get("/", async(req, res) => {
     } catch (error) {
         res.status(500).send({
             status: "failed",
-            message: "gagal dalam mengambil data kendaraan",
+            message: error.message,
         }).end;
     }
 });
@@ -105,7 +104,6 @@ app.delete("/:id", async(req, res) => {
         res.status(500).send(error);
     }
 });
-
 
 
 exports.app = functions.region('asia-southeast2').https.onRequest(app);

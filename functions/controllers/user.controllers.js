@@ -5,9 +5,9 @@ const userCollection = 'user_details';
 const express = require("express");
 const default_image = 'https://www.pngitem.com/pimgs/m/150-1503945_transparent-user-png-default-user-image-png-png.png'
 const app = express();
-// const authMiddleware = require("../AuthMiddleware")
+const validator = require("../AuthMiddleware")
 
-// app.use(authMiddleware);
+app.use(validator);
 
 app.post('/reg', async(req, res) => {
     try {
