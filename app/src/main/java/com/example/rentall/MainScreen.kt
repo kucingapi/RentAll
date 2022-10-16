@@ -37,5 +37,4 @@ fun MainScreen() {
     ) {
         BottomNavGraph(navController = navController)
     }
-//    scaffoldState.snackbarHostState.showSnackbar("test")
 }
