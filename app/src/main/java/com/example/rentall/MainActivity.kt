@@ -8,8 +8,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.rentall.ui.theme.RentAllTheme
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    lateinit var auth :FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
