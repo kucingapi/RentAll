@@ -3,6 +3,7 @@ package com.example.rentall.screens.profile
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -46,9 +47,18 @@ fun ProfileScreen(navController: NavHostController) {
                     modifier = Modifier
                         .width(100.dp)
                         .height(100.dp)
-                        .clip(RoundedCornerShape(100)),
+                        .clip(RoundedCornerShape(100))
+                    ,
                     contentScale = ContentScale.Crop,
                 )
+                Row(Modifier.fillMaxWidth().padding(top = 30.dp),
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically
+
+                ){
+                    Icon(painterResource(R.drawable.ic_arrow_left), contentDescription = null)
+                    Text("Keluar", Modifier.padding(10.dp))
+                }
             }
 
         }

@@ -1,10 +1,13 @@
 package com.example.rentall.screens
 
+import android.content.Intent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
@@ -13,28 +16,35 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.rentall.R
+import com.example.rentall.activity.RentActivity
 import com.example.rentall.component.ButtonSize
 import com.example.rentall.component.ButtonType
 import com.example.rentall.component.DefaultButton
+import com.example.rentall.component.jenis_kendaraan.jenis_mobil
 import com.example.rentall.component.textfield.DefaultTextField
 import com.example.rentall.ui.theme.GridMargin
+import com.example.rentall.ui.theme.RentAllTheme
 
 @Composable
 fun HomeScreen() {
     var text by remember {
         mutableStateOf("")
     }
+    val context = LocalContext.current
+
     Column(
         verticalArrangement = Arrangement.spacedBy(20.dp),
         modifier = Modifier
-        .fillMaxSize()
-        .padding(GridMargin.value.margin)) {
+            .verticalScroll(rememberScrollState())
+            .fillMaxSize()
+            .padding(GridMargin.value.margin)) {
         Row (modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween){
             Column(verticalArrangement = Arrangement.spacedBy(1.dp)) {
                 Text(
@@ -51,7 +61,7 @@ fun HomeScreen() {
             Image(
                 contentScale = ContentScale.Crop, modifier = Modifier
                     .size(70.dp)
-                    .clip(CircleShape), painter = painterResource(id = R.drawable.ic_logo),
+                    .clip(CircleShape), painter = painterResource(id = R.drawable.vania),
                 contentDescription = "gambar mobil"
             )
         }
@@ -61,24 +71,37 @@ fun HomeScreen() {
             onValueChange = { text = it },
             placeholder = "Cari kendaraan"
         )
-        Row (modifier = Modifier.fillMaxWidth()){
+        Row (modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(15.dp)){
             DefaultButton(text = "Mobil", buttonType = ButtonType.PRIMARY, size= ButtonSize.SMALL)
             DefaultButton(text = "Motor", buttonType = ButtonType.OUTLINE, size=ButtonSize.SMALL)
             DefaultButton(text = "Matic", buttonType = ButtonType.OUTLINE, size=ButtonSize.SMALL)
         }
         Text(
-            text = "Dengan dengan lokasi anda",
+            text = "Rekomendasi Untuk Anda",
             style = MaterialTheme.typography.h5,
             fontWeight = FontWeight.Bold
         )
-
+        Column() {
+            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween){
+                Box(Modifier.weight(1f)) {
+                    jenis_mobil(jenis = "sedan") {
+                        context.startActivity(Intent(context, RentActivity::class.java))
+                    }
+                }
+                Box(Modifier.weight(1f)) {
+                    jenis_mobil(jenis = "sedan") {
+                        context.startActivity(Intent(context, RentActivity::class.java))
+                    }
+                }
+            }
+        }
     }
 }
 
 @Composable
 @Preview(showBackground = true)
 fun HomeScreenPreview() {
-    Box(modifier = Modifier.fillMaxSize()) {
+    RentAllTheme() {
         HomeScreen()
     }
 }

@@ -18,13 +18,13 @@ fun RentNavGraph(navController: NavHostController) {
         startDestination = RentRoute.Detail.route
     ) {
         composable(route = RentRoute.Detail.route) {
-            CarDetail()
+            CarDetail(navController)
         }
         composable(route = RentRoute.Rent.route) {
-            Rent()
+            Rent(navController)
         }
         composable(route = RentRoute.Payment.route) {
-            RentCarPayment()
+            RentCarPayment(navController)
         }
     }
 }
