@@ -38,26 +38,28 @@ fun DefaultButton(text: String = "",
     var shape: Dp
     var borderStroke: BorderStroke?
 
-    if(size.equals(ButtonSize.LARGE)){
-        textStyle = MaterialTheme.typography.h3
-        padding = Padding(10.dp, 5.dp)
-        border = 4.dp
-        shape = 16.dp
-        iconSize = 54.dp
-    }
-    else if(size.equals(ButtonSize.MEDIUM)){
-        textStyle = MaterialTheme.typography.h4
-        padding = Padding(5.dp, 2.dp)
-        border = 4.dp
-        shape = 14.dp
-        iconSize = 32.dp
-    }
-    else{
-        textStyle = MaterialTheme.typography.h6
-        padding = Padding(0.dp, 0.dp)
-        border = 4.dp
-        shape = 7.dp
-        iconSize = 16.dp
+    when {
+        size.equals(ButtonSize.LARGE) -> {
+            textStyle = MaterialTheme.typography.h3
+            padding = Padding(10.dp, 5.dp)
+            border = 4.dp
+            shape = 16.dp
+            iconSize = 54.dp
+        }
+        size.equals(ButtonSize.MEDIUM) -> {
+            textStyle = MaterialTheme.typography.h4
+            padding = Padding(5.dp, 2.dp)
+            border = 4.dp
+            shape = 14.dp
+            iconSize = 32.dp
+        }
+        else -> {
+            textStyle = MaterialTheme.typography.h6
+            padding = Padding(0.dp, 0.dp)
+            border = 4.dp
+            shape = 7.dp
+            iconSize = 16.dp
+        }
     }
 
     if(iconSizeInput != null)
@@ -66,34 +68,25 @@ fun DefaultButton(text: String = "",
     if(paddingInput != null){
         padding = paddingInput
     }
-    if(buttonType.equals(ButtonType.OUTLINE)){
-        borderStroke = BorderStroke(border, color = MaterialTheme.colors.primary)
-    }
-    else{
-        borderStroke = null
-    }
+    borderStroke = if(buttonType.equals(ButtonType.OUTLINE))
+        BorderStroke(border, color = MaterialTheme.colors.primary)
+
+    else
+        null
+
 
     val colors =
         if (buttonType == ButtonType.PRIMARY)
             ButtonDefaults.buttonColors(backgroundColor =
-            if(buttonColor != null)
-                buttonColor
-            else
-                MaterialTheme.colors.primary
+            buttonColor ?: MaterialTheme.colors.primary
             )
         else if (buttonType == ButtonType.OUTLINE)
             ButtonDefaults.outlinedButtonColors(backgroundColor =
-            if(buttonColor != null)
-                buttonColor
-            else
-                Color.Transparent
+            buttonColor ?: Color.Transparent
             )
         else
             ButtonDefaults.textButtonColors(backgroundColor =
-            if(buttonColor != null)
-                buttonColor
-            else
-                Color.Transparent
+            buttonColor ?: Color.Transparent
             )
 
     Button(onClick = onClick,
