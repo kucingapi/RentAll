@@ -21,6 +21,4 @@
 1. download file .zip
 2. edit file `app/src/google service.json`
 3. tambahkan `GMP_KEY` pada `local.properties`
-```
-GMP_KEY=AIzaSyCWqtWHjoLVxDMhJ7sBOn0NK8M0_dHvIcg
-```
+
