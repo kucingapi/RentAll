@@ -1,10 +1,8 @@
 package com.example.rentall.component.textfield
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -23,7 +21,9 @@ fun DefaultTextField(value: String,
                      placeholder: String = "Placeholder",
                      modifier: Modifier = Modifier,
                      maxLines: Int = 1,
-                     password: Boolean = false
+                     password: Boolean = false,
+                     trailingIcon: Int? = null,
+                     readOnly: Boolean = false
 ){
     var passwordVisible by remember { mutableStateOf(false) }
     var visualTransformation =
@@ -83,11 +83,22 @@ fun DefaultTextField(value: String,
             trailingIcon = {
                 if(password){
                     IconButton(onClick = { passwordVisible = !passwordVisible }) {
-                        Icon(painter = painterResource(id = image), description, tint = Picton500)
+                        Icon(
+                            painter = painterResource(id = image),
+                            description,
+                            tint = Picton500
+                        )
                     }
                 }
-            }
-
+                else if(trailingIcon != null){
+                    Icon(
+                        painter = painterResource(id = trailingIcon),
+                        description,
+                        tint = Picton500
+                    )
+                }
+            },
+            readOnly = readOnly
         )
     }
 }

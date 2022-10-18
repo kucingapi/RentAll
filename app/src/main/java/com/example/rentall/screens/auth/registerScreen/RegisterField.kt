@@ -1,6 +1,7 @@
 package com.example.rentall.screens.auth.registerScreen
 
-import android.util.Log
+import android.content.Context
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Divider
@@ -10,24 +11,28 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.example.rentall.R
 import com.example.rentall.component.ButtonType
 import com.example.rentall.component.DefaultButton
 import com.example.rentall.component.textfield.DefaultTextField
 import com.example.rentall.service.AccountService
+import com.example.rentall.service.functions.FunctionUserService
 
 @Composable
-fun RegisterField() {
-    var name by remember { mutableStateOf("") }
-    var nik by remember { mutableStateOf("") }
-    var email by remember { mutableStateOf("") }
-    var phone by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-    var passwordConfirmation by remember { mutableStateOf("") }
+fun RegisterField(navController: NavHostController) {
+    var name by remember { mutableStateOf("novel bafagih") }
+    var nik by remember { mutableStateOf("2314") }
+    var email by remember { mutableStateOf("novelb@gmail.com") }
+    var phone by remember { mutableStateOf("12831") }
+    var password by remember { mutableStateOf("12345678") }
+    var passwordConfirmation by remember { mutableStateOf("12345678") }
+    val context = LocalContext.current
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -61,13 +66,15 @@ fun RegisterField() {
             modifier = Modifier.fillMaxWidth(),
             value = password,
             onValueChange = { password = it },
-            placeholder = "Password"
+            placeholder = "Password",
+            password = true
         )
         DefaultTextField(
             modifier = Modifier.fillMaxWidth(),
             value = passwordConfirmation,
             onValueChange = { passwordConfirmation = it },
-            placeholder = "Konfirmasi Password"
+            placeholder = "Konfirmasi Password",
+            password = true
         )
     }
     RegisterWithGoogle()
@@ -81,14 +88,15 @@ fun RegisterField() {
             buttonColor = Color.White,
             modifier = Modifier.fillMaxWidth(),
             onClick = {
-                AccountService.register(name, password){
-                        error ->
-                    if (error == null) {
-                        Log.d("register", "success")
-                    } else{
-                        Log.d("register", error.toString())
-                    }
-                }
+                createUser(
+                    email,
+                    password,
+                    nik,
+                    phone,
+                    name,
+                    context,
+                    passwordConfirmation
+                )
             }
         )
         Row(){
@@ -103,9 +111,42 @@ fun RegisterField() {
                 textAlign = TextAlign.Center,
                 fontWeight = FontWeight.Bold
             )
-
         }
     }
+}
+
+fun createUser(
+    email: String,
+    password: String,
+    nik: String,
+    phone: String,
+    name: String,
+    context: Context,
+    passwordConfirmation: String
+) {
+    if(password != passwordConfirmation){
+        mToast(context, "Password konfirmasi harus sama")
+    }
+    AccountService.register(
+        email,
+        password,
+        onFailure = {
+            mToast(context, "User Failed, there has been an Error")
+        },
+        onSucess = {
+            FunctionUserService.registerAllUserData(
+                name,
+                nik,
+                phone,
+                onSuccess = {
+                    mToast(context, "User has been created")
+                },
+                onFailure = {
+                    mToast(context, "User Failed, there has been an Error")
+                }
+            )
+        }
+    )
 }
 
 @Composable
@@ -144,6 +185,11 @@ fun RegisterWithGoogle() {
         Image(
             modifier = Modifier.size(45.dp),
             painter = painterResource(id = R.drawable.ic_google_logo),
-            contentDescription ="google logo" )
+            contentDescription ="google logo"
+        )
     }
+}
+
+fun mToast(context: Context, message: String){
+    Toast.makeText(context, message, Toast.LENGTH_LONG).show()
 }

@@ -26,6 +26,7 @@ import com.example.rentall.component.DefaultButton
 import com.example.rentall.component.textfield.DefaultTextField
 import com.example.rentall.screens.auth.registerScreen.RegisterField
 import com.example.rentall.ui.theme.*
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -86,7 +87,7 @@ fun RegisterScreen(navController: NavHostController) {
                     textAlign = TextAlign.Center,
                 )
             }
-            RegisterField()
+            RegisterField(navController)
         }
     }
 }

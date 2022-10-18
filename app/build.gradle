@@ -2,7 +2,12 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'com.google.gms.google-services'
+    id 'kotlin-kapt'
+    id 'com.google.secrets_gradle_plugin' version '0.4'
 }
+
+apply plugin: 'com.android.application'
+apply plugin: 'com.google.dagger.hilt.android'
 
 android {
     compileSdk 31
@@ -67,8 +72,17 @@ dependencies {
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
 
+    implementation 'com.google.dagger:hilt-android:2.44'
+    kapt 'com.google.dagger:hilt-compiler:2.44'
+
+    implementation 'com.google.maps.android:maps-compose:2.7.2'
+    implementation 'com.google.android.gms:play-services-maps:18.0.2'
 
 //    Nav Compose
     def nav_version = "2.5.2"
     implementation "androidx.navigation:navigation-compose:$nav_version"
+}
+
+kapt {
+    correctErrorTypes true
 }
