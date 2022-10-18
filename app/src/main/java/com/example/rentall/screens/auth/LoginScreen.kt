@@ -5,10 +5,8 @@ import androidx.navigation.NavHostController
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,7 +21,6 @@ import androidx.navigation.compose.rememberNavController
 import com.example.rentall.R
 import com.example.rentall.component.ButtonType
 import com.example.rentall.component.DefaultButton
-import com.example.rentall.component.button.IconButtonDefault
 import com.example.rentall.component.textfield.DefaultTextField
 import com.example.rentall.ui.theme.*
 

@@ -20,7 +20,7 @@ import com.example.rentall.ui.theme.GridMargin
 import com.example.rentall.ui.theme.RentAllTheme
 
 @Composable
-fun RentCar() {
+fun RentCarPayment() {
     Column(modifier = Modifier
         .fillMaxSize()
         .padding(horizontal = GridMargin.value.margin, vertical = 80.dp),
@@ -60,6 +60,6 @@ fun RentCar() {
 @Composable
 fun RentCarPrev() {
     RentAllTheme{
-        RentCar()
+        RentCarPayment()
     }
 }

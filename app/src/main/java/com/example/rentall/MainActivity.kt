@@ -6,7 +6,9 @@ import androidx.activity.compose.setContent
 import androidx.compose.runtime.*
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.rentall.ui.theme.RentAllTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,8 +19,6 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
-
 
 @Preview(showBackground = true)
 @Composable
