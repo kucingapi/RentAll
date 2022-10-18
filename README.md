@@ -20,7 +20,7 @@
 
 1. download file .zip
 2. modify `app/src/google service.json`
-```
+```json
 {
   "project_info": {
     "project_number": "1016889449917",
