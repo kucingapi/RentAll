@@ -21,7 +21,7 @@ import com.example.rentall.R
 import com.example.rentall.component.ButtonType
 import com.example.rentall.component.CircleBlur
 import com.example.rentall.component.DefaultButton
-import com.example.rentall.screens.auth.navigation.RentRoute
+import com.example.rentall.screens.auth.navigation.AuthRoute
 import com.example.rentall.ui.theme.*
 
 @Composable
@@ -94,7 +94,7 @@ fun LandingScreen(navController: NavHostController) {
                 iconRight = R.drawable.ic_baseline_chevron_right_24,
                 iconSizeInput = 18.dp,
                 onClick = {
-                    navController.navigate(RentRoute.Register.route)
+                    navController.navigate(AuthRoute.Register.route)
                 }
             )
         }

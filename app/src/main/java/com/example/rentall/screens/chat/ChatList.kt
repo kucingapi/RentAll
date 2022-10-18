@@ -23,7 +23,7 @@ fun ChatList(navController: NavHostController ): Unit {
             .padding(horizontal = GridMargin.value.margin, vertical = 15.dp),
         verticalArrangement = Arrangement.spacedBy(20.dp)
     ) {
-        Title(text = "Pesan"){
+        Title(text = "Pesan", button = false){
 
         }
         DefaultTextField(modifier = Modifier.fillMaxWidth(),value = text, onValueChange = {text = it}, placeholder = "Cari")

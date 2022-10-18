@@ -7,6 +7,8 @@ import androidx.navigation.compose.composable
 import com.example.rentall.component.navbar.BottomBarScreen
 import com.example.rentall.screens.HomeScreen
 import com.example.rentall.screens.chat.ChatList
+import com.example.rentall.screens.home.NotificationScreen
+import com.example.rentall.screens.profile.ProfileScreen
 
 @Composable
 fun BottomNavGraph(navController: NavHostController) {
@@ -21,8 +23,10 @@ fun BottomNavGraph(navController: NavHostController) {
             ChatList(navController = navController)
         }
         composable(route = BottomBarScreen.Order.route){
+            NotificationScreen(navController = navController)
         }
         composable(route = BottomBarScreen.Profile.route){
+            ProfileScreen(navController)
         }
     }
     

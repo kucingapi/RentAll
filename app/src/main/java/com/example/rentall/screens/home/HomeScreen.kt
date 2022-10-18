@@ -34,7 +34,7 @@ fun HomeScreen() {
         verticalArrangement = Arrangement.spacedBy(20.dp),
         modifier = Modifier
         .fillMaxSize()
-        .padding(horizontal = GridMargin.value.margin)) {
+        .padding(GridMargin.value.margin)) {
         Row (modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween){
             Column(verticalArrangement = Arrangement.spacedBy(1.dp)) {
                 Text(

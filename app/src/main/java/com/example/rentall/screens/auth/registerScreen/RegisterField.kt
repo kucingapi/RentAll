@@ -1,8 +1,10 @@
 package com.example.rentall.screens.auth.registerScreen
 
 import android.content.Context
+import android.content.Intent
 import android.widget.Toast
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
@@ -18,9 +20,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.rentall.R
+import com.example.rentall.activity.RentActivity
 import com.example.rentall.component.ButtonType
 import com.example.rentall.component.DefaultButton
 import com.example.rentall.component.textfield.DefaultTextField
+import com.example.rentall.screens.auth.navigation.AuthRoute
 import com.example.rentall.service.AccountService
 import com.example.rentall.service.functions.FunctionUserService
 
@@ -101,12 +105,15 @@ fun RegisterField(navController: NavHostController) {
         )
         Row(){
             Text(
-                text = "Sudah punya akun?",
+                text = "Sudah punya akun? ",
                 style = MaterialTheme.typography.subtitle1,
                 textAlign = TextAlign.Center,
             )
             Text(
-                text = " Masuk",
+                modifier = Modifier.clickable {
+                    navController.navigate(AuthRoute.Login.route)
+                },
+                text = "Masuk",
                 style = MaterialTheme.typography.subtitle1,
                 textAlign = TextAlign.Center,
                 fontWeight = FontWeight.Bold
@@ -140,6 +147,7 @@ fun createUser(
                 phone,
                 onSuccess = {
                     mToast(context, "User has been created")
+
                 },
                 onFailure = {
                     mToast(context, "User Failed, there has been an Error")

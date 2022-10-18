@@ -5,6 +5,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
+import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.SnackbarDefaults.backgroundColor
 import androidx.compose.material.Text
@@ -20,54 +21,72 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.rentall.R
 import com.example.rentall.component.days.Days
-import com.example.rentall.ui.theme.Picton100
-import com.example.rentall.ui.theme.Picton200
-import com.example.rentall.ui.theme.Picton50
-import com.example.rentall.ui.theme.RentAllTheme
+import com.example.rentall.ui.theme.*
 
 @Composable
 fun Statbar() {
     Column(
-            modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(2.dp),
             horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Card(
-                modifier = Modifier.fillMaxSize(),
-                shape = RoundedCornerShape(30),
+                modifier = Modifier
+                    .fillMaxWidth()
+            ,
+                shape = RoundedCornerShape(100),
                 backgroundColor = Picton50,
         ) {
-            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                Row() {
+            Box(modifier = Modifier
+                .fillMaxWidth()
+                .padding(10.dp)
+                , contentAlignment = Alignment.TopStart) {
+                Row(horizontalArrangement = Arrangement.spacedBy(15.dp)) {
                     Card(
                             modifier = Modifier.size(70.dp),
                             shape = RoundedCornerShape(100),
                             backgroundColor = Picton200
-                    ) {}
+                    ) {
+                        Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                            Icon(
+                                modifier = Modifier.fillMaxSize(),
+                                painter = painterResource(id = R.drawable.ic_baseline_check_24),
+                                contentDescription = "date",
+                                tint = Picton400
+                            )
+                        }
+                    }
                     Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                         Text(
                                 text = "Toyota Fortuner",
                                 style = MaterialTheme.typography.body1,
                                 fontWeight = FontWeight.Bold,
-                                color = Picton50
+                                color = Picton500
                         )
-                        Row() {
-                            Image(
-                                    modifier = Modifier.width(30.dp),
+                        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(5.dp)) {
+                            Icon(
+                                    modifier = Modifier.size(15.dp),
                                     painter = painterResource(id = R.drawable.ic_date),
                                     contentDescription = "date",
-                                    contentScale = ContentScale.Fit
+                                    tint = Picton400
                             )
-                            Text(text = "29/08/2022 - 30/08/2022", style = MaterialTheme.typography.subtitle2, color = Color.Gray)
+                            Text(
+                                text = "29/08/2022 - 30/08/2022",
+                                style = MaterialTheme.typography.subtitle2,
+                                color = Picton400
+                            )
                         }
-                        Row() {
-                            Image(
-                                    modifier = Modifier.width(30.dp),
-                                    painter = painterResource(id = R.drawable.ic_rupiah),
-                                    contentDescription = "harga",
-                                    contentScale = ContentScale.Fit
+                        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(5.dp)) {
+                            Icon(
+                                modifier = Modifier.size(15.dp),
+                                painter = painterResource(id = R.drawable.ic_rupiah),
+                                contentDescription = "harga",
+                                tint = Picton400
                             )
-                            Text(text = "1.000.000", style = MaterialTheme.typography.subtitle2, color = Color.Gray)
+                            Text(
+                                text = "1.000.000",
+                                style = MaterialTheme.typography.subtitle2,
+                                color = Picton400
+                            )
                         }
                     }
                 }

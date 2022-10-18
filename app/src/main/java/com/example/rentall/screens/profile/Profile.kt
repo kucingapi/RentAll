@@ -14,11 +14,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.rentall.R
 import com.example.rentall.ui.theme.RentAllTheme
 
 @Composable
-fun ProfileScreen() {
+fun ProfileScreen(navController: NavHostController) {
     Box(modifier = Modifier
         .fillMaxSize()){
         Image(
@@ -41,7 +43,10 @@ fun ProfileScreen() {
                 Image(
                     painter = painterResource(id = R.drawable.vania),
                     contentDescription = "profile picture",
-                    modifier = Modifier.width(100.dp).height(100.dp).clip(RoundedCornerShape(100)),
+                    modifier = Modifier
+                        .width(100.dp)
+                        .height(100.dp)
+                        .clip(RoundedCornerShape(100)),
                     contentScale = ContentScale.Crop,
                 )
             }
@@ -54,6 +59,6 @@ fun ProfileScreen() {
 @Composable
 fun PreviewProfile() {
     RentAllTheme {
-        ProfileScreen();
+        ProfileScreen(rememberNavController());
     }
 }
