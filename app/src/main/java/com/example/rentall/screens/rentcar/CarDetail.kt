@@ -187,10 +187,6 @@ fun FloatingPriceButton() {
                 style = MaterialTheme.typography.h5,
                 fontWeight = FontWeight.Bold
             )
-            DefaultButton(
-                text = "Sewa",
-                paddingInput = Padding(horizontal = 5.dp, vertical = 0.dp)
-            )
         }
     }
 }

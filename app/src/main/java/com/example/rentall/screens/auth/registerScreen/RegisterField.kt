@@ -23,7 +23,6 @@ import com.example.rentall.component.DefaultButton
 import com.example.rentall.component.textfield.DefaultTextField
 import com.example.rentall.service.AccountService
 import com.example.rentall.service.functions.FunctionUserService
-import com.google.firebase.auth.FirebaseAuth
 
 @Composable
 fun RegisterField(navController: NavHostController) {
