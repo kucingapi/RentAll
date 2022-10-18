@@ -19,6 +19,5 @@
 ## Instalation Guide
 
 1. download file .zip
-2. edit file `app/src/google service.json`
-3. tambahkan `GMP_KEY` pada `local.properties`
-
+2. edit file `app/src/google service.json` (kode terdapat pada file Gdrive)
+3. tambahkan `GMP_KEY` pada `local.properties` (kode terdapat pada file Gdrive)
