@@ -3,8 +3,6 @@ package com.example.rentall.screens.auth
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -23,7 +21,7 @@ import com.example.rentall.R
 import com.example.rentall.component.ButtonType
 import com.example.rentall.component.CircleBlur
 import com.example.rentall.component.DefaultButton
-import com.example.rentall.screens.auth.navigation.AuthRoute
+import com.example.rentall.screens.auth.navigation.RentRoute
 import com.example.rentall.ui.theme.*
 
 @Composable
@@ -96,7 +94,7 @@ fun LandingScreen(navController: NavHostController) {
                 iconRight = R.drawable.ic_baseline_chevron_right_24,
                 iconSizeInput = 18.dp,
                 onClick = {
-                    navController.navigate(AuthRoute.Register.route)
+                    navController.navigate(RentRoute.Register.route)
                 }
             )
         }

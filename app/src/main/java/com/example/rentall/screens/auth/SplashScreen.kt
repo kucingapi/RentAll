@@ -17,7 +17,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.rentall.R
 import com.example.rentall.component.CircleBlur
-import com.example.rentall.screens.auth.navigation.AuthRoute
+import com.example.rentall.screens.auth.navigation.RentRoute
 import com.example.rentall.ui.theme.Picton200
 import kotlinx.coroutines.delay
 
@@ -35,7 +35,7 @@ fun SplashScreen(navController: NavHostController) {
         startAnimation = true
         delay(4000)
         navController.popBackStack()
-        navController.navigate(AuthRoute.Landing.route)
+        navController.navigate(RentRoute.Landing.route)
     }
     Box(modifier = Modifier
         .fillMaxSize()
