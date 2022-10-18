@@ -11,17 +11,15 @@ app.use(validator);
 app.post('/create', async(req, res) => {
     try {
         const order = req.body;
-        const data = await db.collection(dbCollection).doc('orderId').add(order);
+        const data = await db.collection(dbCollection).add(order);
         const response = {
             status: "success",
             message: "pembuatan pesanan berhasil",
         }
         res.status(201).send(response);
-
     } catch (error) {
         res.status(400).send("error di pembuatan pesanan");
     }
-
 });
 
 app.get("/", async(req, res) => {
@@ -104,7 +102,6 @@ app.delete("/:id", async(req, res) => {
         res.status(500).send(error);
     }
 });
-
 
 
 exports.app = functions.region('asia-southeast2').https.onRequest(app);
