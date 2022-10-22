@@ -1,6 +1,7 @@
 package com.example.rentall.screens
 
 import android.content.Intent
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -29,15 +30,35 @@ import com.example.rentall.component.ButtonType
 import com.example.rentall.component.DefaultButton
 import com.example.rentall.component.jenis_kendaraan.jenis_mobil
 import com.example.rentall.component.textfield.DefaultTextField
+import com.example.rentall.service.functions.FunctionVehicleService
 import com.example.rentall.ui.theme.GridMargin
 import com.example.rentall.ui.theme.RentAllTheme
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 @Composable
 fun HomeScreen() {
     var text by remember {
         mutableStateOf("")
     }
+    var displayName by remember {
+        mutableStateOf("Hi, ")
+    }
     val context = LocalContext.current
+    val user = Firebase.auth.currentUser
+
+    if(user != null){
+        displayName += user.displayName
+    }
+
+    FunctionVehicleService.getAllVehicle(
+        onFailure = {
+            Log.d("functions", "Failed")
+        },
+        onSuccess = {
+            Log.d("functions", "Success")
+        }
+    )
 
     Column(
         verticalArrangement = Arrangement.spacedBy(20.dp),
@@ -48,7 +69,7 @@ fun HomeScreen() {
         Row (modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween){
             Column(verticalArrangement = Arrangement.spacedBy(1.dp)) {
                 Text(
-                    text = "Hi, Vania",
+                    text = displayName,
                     style = MaterialTheme.typography.h5,
                     fontWeight = FontWeight.Bold
                 )

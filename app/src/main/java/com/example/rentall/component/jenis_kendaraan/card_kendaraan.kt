@@ -32,7 +32,8 @@ import com.example.rentall.ui.theme.Picton500
 fun jenis_mobil(jenis: String, onClick: () -> Unit = {}){
 
         Card(modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(15)){
+        shape = RoundedCornerShape(15),
+        elevation = 10.dp){
             Column(modifier = Modifier
                 .fillMaxSize()
                 .padding(15.dp)

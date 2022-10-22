@@ -1,6 +1,5 @@
 package com.example.rentall.service.functions
 
-import java.net.URL
 
 class FunctionUserService {
     companion object{

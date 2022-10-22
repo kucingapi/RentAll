@@ -1,6 +1,7 @@
 package com.example.rentall.screens.auth
 
 import android.content.Intent
+import android.util.Log
 import androidx.compose.foundation.*
 import androidx.navigation.NavHostController
 import androidx.compose.foundation.layout.*
@@ -24,12 +25,14 @@ import com.example.rentall.activity.RentActivity
 import com.example.rentall.component.ButtonType
 import com.example.rentall.component.DefaultButton
 import com.example.rentall.component.textfield.DefaultTextField
+import com.example.rentall.service.AccountService
 import com.example.rentall.ui.theme.*
 
 @Composable
 fun LoginScreen(navController: NavHostController) {
     val context = LocalContext.current
-    var text by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
     Box(modifier = Modifier
         .fillMaxSize()
         .background(Picton200)
@@ -71,14 +74,14 @@ fun LoginScreen(navController: NavHostController) {
             ) {
                 DefaultTextField(
                     modifier = Modifier.fillMaxWidth(),
-                    value = text,
-                    onValueChange = { text = it },
+                    value = email,
+                    onValueChange = { email = it },
                     placeholder = "Email"
                 )
                 DefaultTextField(
                     modifier = Modifier.fillMaxWidth(),
-                    value = text,
-                    onValueChange = { text = it },
+                    value = password,
+                    onValueChange = { password = it },
                     placeholder = "Password"
                 )
             }
@@ -88,12 +91,19 @@ fun LoginScreen(navController: NavHostController) {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 DefaultButton(
-                    text = "Daftar",
+                    text = "Login",
                     ButtonType.TEXT,
                     buttonColor = Color.White,
                     modifier = Modifier.fillMaxWidth(),
                     onClick = {
-                        context.startActivity(Intent(context, MainActivity::class.java))
+                        AccountService.authenticate(email, password,
+                            onSucess = {
+                                context.startActivity(Intent(context, MainActivity::class.java))
+                            },
+                            onFailure = {
+                                Log.d("login", it.message.toString())
+                            }
+                        )
                     }
                 )
                 Row(){

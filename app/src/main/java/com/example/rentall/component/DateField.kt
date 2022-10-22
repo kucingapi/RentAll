@@ -26,7 +26,6 @@ fun DateField(
         value = mDate,
         onValueChange = onValueChange,
         trailingIcon = R.drawable.ic_date,
-        readOnly = true
     )
 }
 
