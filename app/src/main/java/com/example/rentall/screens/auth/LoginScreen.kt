@@ -1,32 +1,38 @@
 package com.example.rentall.screens.auth
 
-import androidx.compose.foundation.Image
+import android.content.Intent
+import android.util.Log
+import androidx.compose.foundation.*
 import androidx.navigation.NavHostController
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
+import com.example.rentall.MainActivity
+import com.example.rentall.screens.auth.navigation.AuthRoute
 import com.example.rentall.R
+import com.example.rentall.activity.RentActivity
 import com.example.rentall.component.ButtonType
 import com.example.rentall.component.DefaultButton
 import com.example.rentall.component.textfield.DefaultTextField
+import com.example.rentall.service.AccountService
 import com.example.rentall.ui.theme.*
 
 @Composable
 fun LoginScreen(navController: NavHostController) {
-    var text by remember { mutableStateOf("") }
+    val context = LocalContext.current
+    var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
     Box(modifier = Modifier
         .fillMaxSize()
         .background(Picton200)
@@ -68,14 +74,14 @@ fun LoginScreen(navController: NavHostController) {
             ) {
                 DefaultTextField(
                     modifier = Modifier.fillMaxWidth(),
-                    value = text,
-                    onValueChange = { text = it },
+                    value = email,
+                    onValueChange = { email = it },
                     placeholder = "Email"
                 )
                 DefaultTextField(
                     modifier = Modifier.fillMaxWidth(),
-                    value = text,
-                    onValueChange = { text = it },
+                    value = password,
+                    onValueChange = { password = it },
                     placeholder = "Password"
                 )
             }
@@ -85,19 +91,32 @@ fun LoginScreen(navController: NavHostController) {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 DefaultButton(
-                    text = "Daftar",
+                    text = "Login",
                     ButtonType.TEXT,
                     buttonColor = Color.White,
                     modifier = Modifier.fillMaxWidth(),
+                    onClick = {
+                        AccountService.authenticate(email, password,
+                            onSucess = {
+                                context.startActivity(Intent(context, MainActivity::class.java))
+                            },
+                            onFailure = {
+                                Log.d("login", it.message.toString())
+                            }
+                        )
+                    }
                 )
                 Row(){
                     Text(
-                        text = "Sudah punya akun?",
+                        text = "Belum punya akun?",
                         style = MaterialTheme.typography.subtitle1,
                         textAlign = TextAlign.Center,
                     )
                     Text(
-                        text = " Masuk",
+                        modifier = Modifier.clickable {
+                            navController.navigate(AuthRoute.Landing.route)
+                        },
+                        text = " Daftar",
                         style = MaterialTheme.typography.subtitle1,
                         textAlign = TextAlign.Center,
                         fontWeight = FontWeight.Bold

@@ -5,6 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.rentall.screens.auth.LandingScreen
+import com.example.rentall.screens.auth.LoginScreen
 import com.example.rentall.screens.auth.RegisterScreen
 import com.example.rentall.screens.auth.SplashScreen
 
@@ -22,6 +23,9 @@ fun AuthNavGraph(navController: NavHostController) {
         }
         composable(route = AuthRoute.Register.route) {
             RegisterScreen(navController = navController)
+        }
+        composable(route = AuthRoute.Login.route) {
+            LoginScreen(navController = navController)
         }
     }
 }

@@ -9,16 +9,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.rentall.component.DateField
 import com.example.rentall.component.DefaultButton
 import com.example.rentall.component.textfield.DefaultTextField
 import com.example.rentall.component.title.Title
+import com.example.rentall.screens.auth.navigation.RentRoute
 import com.example.rentall.ui.theme.GridMargin
 import com.example.rentall.ui.theme.Picton500
 import com.example.rentall.ui.theme.RentAllTheme
 
 @Composable
-fun Rent() {
+fun Rent(navController: NavHostController) {
     Box(
         Modifier
             .fillMaxSize()
@@ -101,7 +104,10 @@ fun Rent() {
         Column(Modifier.align(Alignment.BottomCenter)) {
             DefaultButton(
                 modifier = Modifier.fillMaxWidth(),
-                text = "Selanjutnya"
+                text = "Selanjutnya",
+                onClick = {
+                    navController.navigate(RentRoute.Payment.route)
+                }
             )
         }
     }
@@ -111,6 +117,6 @@ fun Rent() {
 @Composable
 fun RentPreview() {
     RentAllTheme() {
-        Rent()
+        Rent(rememberNavController())
     }
 }

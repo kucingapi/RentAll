@@ -16,16 +16,24 @@ import com.example.rentall.component.button.IconButtonDefault
 import com.example.rentall.ui.theme.RentAllTheme
 
 @Composable
-fun Title(modifier: Modifier = Modifier,text: String, padding: Dp = 40.dp, onClick:() -> Unit) {
+fun Title(
+    modifier: Modifier = Modifier,
+    text: String,
+    padding: Dp = 10.dp,
+    button: Boolean = true,
+    onClick: () -> Unit
+) {
     Box(modifier = modifier.fillMaxWidth().padding(top = padding)){
 
-        IconButtonDefault(
-            onClick = onClick,
-            size=ButtonSize.SMALL,
-            iconId = R.drawable.ic_arrow_left,
-            modifier = Modifier.align(Alignment.TopStart),
-            contentPadding = 7.dp
-        )
+        if(button){
+            IconButtonDefault(
+                onClick = onClick,
+                size=ButtonSize.SMALL,
+                iconId = R.drawable.ic_arrow_left,
+                modifier = Modifier.align(Alignment.TopStart),
+                contentPadding = 7.dp
+            )
+        }
         Text(
             modifier = Modifier.align(Alignment.Center),
             text = text,

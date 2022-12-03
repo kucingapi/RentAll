@@ -1,8 +1,11 @@
 package com.example.rentall.screens.auth.registerScreen
 
 import android.content.Context
+import android.content.Intent
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
@@ -17,21 +20,27 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.example.rentall.MainActivity
 import com.example.rentall.R
+import com.example.rentall.activity.RentActivity
 import com.example.rentall.component.ButtonType
 import com.example.rentall.component.DefaultButton
 import com.example.rentall.component.textfield.DefaultTextField
+import com.example.rentall.screens.auth.navigation.AuthRoute
 import com.example.rentall.service.AccountService
 import com.example.rentall.service.functions.FunctionUserService
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.auth.ktx.userProfileChangeRequest
+import com.google.firebase.ktx.Firebase
 
 @Composable
 fun RegisterField(navController: NavHostController) {
-    var name by remember { mutableStateOf("novel bafagih") }
-    var nik by remember { mutableStateOf("2314") }
-    var email by remember { mutableStateOf("novelb@gmail.com") }
-    var phone by remember { mutableStateOf("12831") }
-    var password by remember { mutableStateOf("12345678") }
-    var passwordConfirmation by remember { mutableStateOf("12345678") }
+    var name by remember { mutableStateOf("") }
+    var nik by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf("") }
+    var phone by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+    var passwordConfirmation by remember { mutableStateOf("") }
     val context = LocalContext.current
 
     Column(
@@ -101,12 +110,15 @@ fun RegisterField(navController: NavHostController) {
         )
         Row(){
             Text(
-                text = "Sudah punya akun?",
+                text = "Sudah punya akun? ",
                 style = MaterialTheme.typography.subtitle1,
                 textAlign = TextAlign.Center,
             )
             Text(
-                text = " Masuk",
+                modifier = Modifier.clickable {
+                    navController.navigate(AuthRoute.Login.route)
+                },
+                text = "Masuk",
                 style = MaterialTheme.typography.subtitle1,
                 textAlign = TextAlign.Center,
                 fontWeight = FontWeight.Bold
@@ -126,6 +138,7 @@ fun createUser(
 ) {
     if(password != passwordConfirmation){
         mToast(context, "Password konfirmasi harus sama")
+        return;
     }
     AccountService.register(
         email,
@@ -134,11 +147,25 @@ fun createUser(
             mToast(context, "User Failed, there has been an Error")
         },
         onSucess = {
+            val user = Firebase.auth.currentUser
+            val profileUpdates = userProfileChangeRequest {
+                displayName = name
+            }
+            user!!.updateProfile(profileUpdates)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        Log.d("success", "User profile updated.")
+                    }
+                    else {
+                        Log.d("failed", "Failed")
+                    }
+                }
             FunctionUserService.registerAllUserData(
                 name,
                 nik,
                 phone,
                 onSuccess = {
+                    context.startActivity(Intent(context, MainActivity::class.java))
                     mToast(context, "User has been created")
                 },
                 onFailure = {

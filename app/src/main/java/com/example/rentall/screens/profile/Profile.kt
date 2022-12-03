@@ -3,6 +3,7 @@ package com.example.rentall.screens.profile
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -14,11 +15,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.rentall.R
 import com.example.rentall.ui.theme.RentAllTheme
 
 @Composable
-fun ProfileScreen() {
+fun ProfileScreen(navController: NavHostController) {
     Box(modifier = Modifier
         .fillMaxSize()){
         Image(
@@ -41,9 +44,21 @@ fun ProfileScreen() {
                 Image(
                     painter = painterResource(id = R.drawable.vania),
                     contentDescription = "profile picture",
-                    modifier = Modifier.width(100.dp).height(100.dp).clip(RoundedCornerShape(100)),
+                    modifier = Modifier
+                        .width(100.dp)
+                        .height(100.dp)
+                        .clip(RoundedCornerShape(100))
+                    ,
                     contentScale = ContentScale.Crop,
                 )
+                Row(Modifier.fillMaxWidth().padding(top = 30.dp),
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically
+
+                ){
+                    Icon(painterResource(R.drawable.ic_arrow_left), contentDescription = null)
+                    Text("Keluar", Modifier.padding(10.dp))
+                }
             }
 
         }
@@ -54,6 +69,6 @@ fun ProfileScreen() {
 @Composable
 fun PreviewProfile() {
     RentAllTheme {
-        ProfileScreen();
+        ProfileScreen(rememberNavController());
     }
 }

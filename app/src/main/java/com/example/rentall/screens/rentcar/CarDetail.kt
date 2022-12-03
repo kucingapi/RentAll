@@ -17,11 +17,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.rentall.R
+import com.example.rentall.component.ButtonSize
 import com.example.rentall.component.DefaultButton
 import com.example.rentall.component.button.Padding
 import com.example.rentall.component.days.Days
 import com.example.rentall.component.title.Title
+import com.example.rentall.screens.auth.navigation.RentRoute
 import com.example.rentall.ui.theme.GridMargin
 import com.example.rentall.ui.theme.Picton500
 import com.example.rentall.ui.theme.RentAllTheme
@@ -31,14 +35,14 @@ import com.google.maps.android.compose.MapType
 import com.google.maps.android.compose.MapUiSettings
 
 @Composable
-fun CarDetail() {
+fun CarDetail(navController: NavHostController) {
     var uiSettings by remember { mutableStateOf(MapUiSettings()) }
     var properties by remember {
         mutableStateOf(MapProperties(mapType = MapType.SATELLITE))
     }
 
     Scaffold(
-        bottomBar = {FloatingPriceButton()}
+        bottomBar = {FloatingPriceButton(navController)}
     ) {
         Column(modifier = Modifier
             .fillMaxSize()
@@ -169,7 +173,7 @@ fun CarSpec(text: String, image: Int){
 }
 
 @Composable
-fun FloatingPriceButton() {
+fun FloatingPriceButton(navController: NavHostController) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -187,6 +191,13 @@ fun FloatingPriceButton() {
                 style = MaterialTheme.typography.h5,
                 fontWeight = FontWeight.Bold
             )
+            DefaultButton(
+                text = "Sewa",
+                size = ButtonSize.SMALL,
+                onClick = {
+                    navController.navigate(RentRoute.Rent.route)
+                }
+            )
         }
     }
 }
@@ -195,6 +206,6 @@ fun FloatingPriceButton() {
 @Composable
 fun CarDetailPrev() {
     RentAllTheme{
-        CarDetail()
+        CarDetail(rememberNavController())
     }
 }

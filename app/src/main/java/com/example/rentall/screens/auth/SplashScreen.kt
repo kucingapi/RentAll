@@ -18,6 +18,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.rentall.R
 import com.example.rentall.component.CircleBlur
 import com.example.rentall.screens.auth.navigation.AuthRoute
+import com.example.rentall.screens.auth.navigation.RentRoute
 import com.example.rentall.ui.theme.Picton200
 import kotlinx.coroutines.delay
 

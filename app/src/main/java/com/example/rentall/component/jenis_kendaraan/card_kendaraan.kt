@@ -29,34 +29,42 @@ import com.example.rentall.ui.theme.Picton50
 import com.example.rentall.ui.theme.Picton500
 
 @Composable
-fun jenis_mobil(jenis: String){
+fun jenis_mobil(jenis: String, onClick: () -> Unit = {}){
 
-        Card(modifier = Modifier.size(width = 170.dp, height = 200.dp),
-        shape = RoundedCornerShape(15)){
+        Card(modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(15),
+        elevation = 10.dp){
             Column(modifier = Modifier
                 .fillMaxSize()
-                .padding(vertical = 2.dp)
-                ,verticalArrangement = Arrangement.spacedBy(2.dp)
+                .padding(15.dp)
+                ,verticalArrangement = Arrangement.SpaceBetween
             ){
                 Image(modifier = Modifier
-                    .width(150.dp),
+                    .fillMaxWidth(),
                     painter = painterResource(id = R.drawable.car),
                     contentDescription = "gambar mobil",
                     contentScale = ContentScale.Fit
                 )
                 Column(verticalArrangement = Arrangement.spacedBy(1.dp)) {
-                    Text(text = "Toyota Fortuner", style = MaterialTheme.typography.body1, fontWeight = FontWeight.Bold)
+                    Text(text = "Toyota Fortuner", style = MaterialTheme.typography.body2, fontWeight = FontWeight.Bold)
                     Text(text = "SUV", style = MaterialTheme.typography.subtitle2,fontSize = 9.sp, color = Color.Gray)
                 }
-                Row{
-                Text(
-                    text = "Rp. 100.000/hari",
-                    style = MaterialTheme.typography.subtitle2,
-                    fontSize = 9.sp,
-                    fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Start
-                )
-                    IconButtonDefault( buttonType = ButtonType.PRIMARY, size=ButtonSize.SMALL, iconId = R.drawable.ic_baseline_chevron_right_24)
+                Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.Bottom){
+                    Text(
+                        text = "Rp. 100.000/hari",
+                        style = MaterialTheme.typography.subtitle2,
+                        fontSize = 9.sp,
+                        fontWeight = FontWeight.Bold,
+                        textAlign = TextAlign.Start
+                    )
+                    IconButtonDefault(
+                        buttonType = ButtonType.PRIMARY,
+                        size = ButtonSize.SMALL,
+                        iconId = R.drawable.ic_baseline_chevron_right_24,
+                        onClick = {
+                            onClick()
+                        }
+                    )
 
                 }
 

@@ -1,5 +1,6 @@
 package com.example.rentall.screens.rentcar
 
+import android.content.Intent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
@@ -9,18 +10,23 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+import com.example.rentall.MainActivity
 import com.example.rentall.R
 import com.example.rentall.component.DefaultButton
 import com.example.rentall.ui.theme.GridMargin
 import com.example.rentall.ui.theme.RentAllTheme
 
 @Composable
-fun RentCarPayment() {
+fun RentCarPayment(navController: NavHostController) {
+    val context = LocalContext.current
     Column(modifier = Modifier
         .fillMaxSize()
         .padding(horizontal = GridMargin.value.margin, vertical = 80.dp),
@@ -52,7 +58,9 @@ fun RentCarPayment() {
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.End
         )
-        DefaultButton(text = "Bayar", modifier = Modifier.fillMaxWidth())
+        DefaultButton(text = "Bayar", modifier = Modifier.fillMaxWidth(), onClick = {
+            context.startActivity(Intent(context, MainActivity::class.java))
+        })
     }
 }
 
@@ -60,6 +68,6 @@ fun RentCarPayment() {
 @Composable
 fun RentCarPrev() {
     RentAllTheme{
-        RentCarPayment()
+        RentCarPayment(rememberNavController())
     }
 }
